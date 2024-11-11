@@ -1,5 +1,6 @@
 package com.quanxiaoha.weblog.web.controller;
 
+import com.quanxiaoha.weblog.common.utils.JsonUtil;
 import com.quanxiaoha.weblog.common.utils.Response;
 import com.quanxiaoha.weblog.web.model.User;
 import com.quanxiaoha.weblog.common.aspect.ApiOperationLog;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 /**
@@ -28,7 +32,13 @@ public class TestController {
     @ApiOperationLog(description = "测试接口")
     @ApiOperation(value = "测试接口")
     public Response test(@RequestBody @Validated User user) {
-        return Response.success();
+        log.info(JsonUtil.toJsonString(user));
+
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateDate(LocalDate.now());
+        user.setTime(LocalTime.now());
+
+        return Response.success(user);
     }
 
 }
