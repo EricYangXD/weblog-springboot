@@ -16,13 +16,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-
-/**
- * @author: 犬小哈
- * @url: www.quanxiaoha.com
- * @date: 2023-08-10 10:34
- * @description: TODO
- **/
 @RestController
 @Slf4j
 @Api(tags = "首页模块")
@@ -32,6 +25,19 @@ public class TestController {
     @ApiOperationLog(description = "测试接口")
     @ApiOperation(value = "测试接口")
     public Response test(@RequestBody @Validated User user) {
+        log.info(JsonUtil.toJsonString(user));
+
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateDate(LocalDate.now());
+        user.setTime(LocalTime.now());
+
+        return Response.success(user);
+    }
+
+    @PostMapping("/admin/test")
+    @ApiOperationLog(description = "测试接口")
+    @ApiOperation(value = "测试接口")
+    public Response adminTest(@RequestBody @Validated User user) {
         log.info(JsonUtil.toJsonString(user));
 
         user.setCreateTime(LocalDateTime.now());
