@@ -1,8 +1,6 @@
 package com.quanxiaoha.weblog.common.domain.dos;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +18,7 @@ public class UserDO {
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    @TableField(condition = SqlCondition.LIKE)
     private String username;
 
     private String password;
@@ -28,5 +27,12 @@ public class UserDO {
 
     private Date updateTime;
 
+    @TableField(exist = false)
     private Boolean isDeleted;
+
+    private String email;
+
+    private Integer age;
+
+    private String address;
 }
